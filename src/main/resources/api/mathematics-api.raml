@@ -1,0 +1,43 @@
+#%RAML 1.0
+title: Mathematics API
+version: v1
+baseUri: http://api.math.com/{version}
+mediaType: application/json
+
+/calculation:
+  description: Perform a mathematical operation on two numbers.
+  post:
+    description: Accepts two numbers and performs the specified operation.
+    queryParameters:
+      operation:
+        type: string
+        enum: [Add, Subtract, Multiply, Divide]
+        required: true
+        description: The operation to perform on the numbers.
+    body:
+      application/json:
+        type: object
+        properties:
+          number1:
+            type: number | string
+            required: true
+          number2:
+            type: number | string
+            required: true
+        example: |
+          {
+            "number1": 5,
+            "number2": 10
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            type: object
+            properties:
+              result:
+                type: number
+            example: |
+              {
+                "result": 15
+              }
